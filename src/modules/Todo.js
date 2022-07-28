@@ -1,9 +1,10 @@
-class Todo {
+export default class Todo {
   constructor(title, description = '', dueDate, priority = '') {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.completed = false;
   }
 
   getTitle() {
@@ -36,5 +37,13 @@ class Todo {
 
   setPriority(newPriority) {
     this.priority = newPriority;
+  }
+
+  getCompleted() {
+    return this.completed;
+  }
+
+  toggleCompleted() {
+    this.completed = !this.completed;
   }
 }

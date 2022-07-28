@@ -13,6 +13,10 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        use: 'asset/resource',
+      }
     ],
   },
   plugins: [
@@ -20,4 +24,5 @@ module.exports = {
       title: 'Test',
     }),
   ],
+  devtool: 'inline-source-map',
 };
