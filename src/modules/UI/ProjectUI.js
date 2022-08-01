@@ -1,4 +1,6 @@
 import Todo from "../Todo";
+import DeleteIcon from "../../icons/delete.png"
+
 /**
  * Creates the HTML Node for the input project.
  * @param {Project} project 
@@ -32,6 +34,11 @@ function drawTodoNode(todo, project) {
   const todoNode = document.createElement('div');
   todoNode.classList.add('todo');
 
+  const left = document.createElement('div');
+  left.classList.add('left');
+  const right = document.createElement('div');
+  right.classList.add('right');
+
   const title = document.createElement('div');
   title.classList.add('title');
   title.textContent = todo.getTitle();
@@ -41,6 +48,7 @@ function drawTodoNode(todo, project) {
   completeButton.classList.add('complete');
   if (todo.getCompleted()) {
     completeButton.classList.add('completed');
+    title.classList.add('strikethrough');
   }
   completeButton.addEventListener('click', () => {
     todo.toggleCompleted();
@@ -53,6 +61,9 @@ function drawTodoNode(todo, project) {
     }
   });
 
+  left.appendChild(completeButton);
+  left.appendChild(title);
+
   const deleteButton = document.createElement('button');
   deleteButton.setAttribute('type', 'button');
   deleteButton.classList.add('delete');
@@ -60,10 +71,14 @@ function drawTodoNode(todo, project) {
     project.deleteTodo(todo);
     todoNode.remove();
   });
+  const deleteButtonImg = new Image();
+  deleteButtonImg.src = DeleteIcon;
+  deleteButton.appendChild(deleteButtonImg);
 
-  todoNode.appendChild(completeButton);
-  todoNode.appendChild(title);
-  todoNode.appendChild(deleteButton);
+  right.appendChild(deleteButton);
+
+  todoNode.appendChild(left);
+  todoNode.appendChild(right);
 
   return todoNode;
 }

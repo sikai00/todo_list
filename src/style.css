@@ -1,9 +1,19 @@
 @font-face {
-  font-family: 'Ubuntu';
-  src: url('./fonts/ubuntu-regular.woff2') format('woff2'),
-       url('./fonts/ubuntu-regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
+  font-family: 'Barlow Bold';
+  src: url('./fonts/barlow-bold-webfont.woff2') format('woff2'),
+       url('./fonts/barlow-bold-webfont.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('./fonts/sourcesanspro-regular-webfont.woff2') format('woff2'),
+       url('./fonts/sourcesanspro-regular-webfont.woff') format('woff');
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .project {
@@ -22,15 +32,15 @@
 
 .todo {
   display: flex;
-  column-gap: 10px;
   align-items: flex-start;
-  min-height: 50px;
   border-bottom: 1px solid rgb(207, 207, 207);
+  justify-content: space-between;
 }
 
 .title {
-  flex-grow: 1;
   overflow-wrap: break-word;
+  max-width: 90%;
+  padding-bottom: 30px;
 }
 
 .complete,
@@ -45,11 +55,11 @@
 }
 
 .delete {
-  position: relative;
+  border: 0;
 }
 
 .completed {
-  background-color: red;
+  background-color: rgb(172, 172, 172);
 }
 
 .strikethrough {
@@ -66,4 +76,58 @@
 
 .add:hover {
   color: orange;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  background-color: rgb(248, 248, 248);
+  grid-row: 1 / 1;
+}
+
+.project-listing {
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px 20px;
+  background-color: rgb(248, 248, 248);
+}
+
+.active-listing {
+  background-color: rgb(230, 230, 230);
+}
+
+.navbar {
+  font-family: 'Barlow Bold';
+  font-size: 2rem;
+  color: rgb(255, 255, 255);
+  background-color: rgb(145, 121, 190);
+  padding: 10px 20px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 1fr;
+  font-family: 'Source Sans Pro';
+  flex-grow: 1;
+}
+
+.main {
+  grid-column: 2 / 6;
+  grid-row: 1 / 1;
+}
+
+.left {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  column-gap: 10px;
+  max-width: 80%;
+}
+
+.add-task form {
+
 }
