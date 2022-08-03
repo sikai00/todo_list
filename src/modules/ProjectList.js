@@ -24,8 +24,8 @@ export default class ProjectList {
     }
   }
 
-  deleteProject(project) {
-    this.project_list = this.project_list.filter(x => x !== project);
+  deleteProject(projectName) {
+    this.project_list = this.project_list.filter(x => x.getTitle() !== projectName);
   }
 
   contains(project) {

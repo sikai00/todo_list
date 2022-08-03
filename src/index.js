@@ -48,19 +48,30 @@ main.classList.add('main');
 // Project listings
 const projectListNode = drawProjectListNode(project_list);
 projectListNode.childNodes.forEach(
-  listing => listing.addEventListener(
-    'click', 
-    () => {
-      main.textContent = ''; // Wipes any content from previous project
-      main.appendChild(
-        drawProjectNode(project_list.getProject(listing.textContent))
-      );
-      projectListNode.childNodes.forEach(x => x.classList.remove('active-listing'));
-      listing.classList.add('active-listing');
-    }
-  )
+  listing => {
+    listing.querySelector('div').addEventListener(
+      'click', 
+      () => {
+        main.textContent = ''; // Wipes any content from previous project
+        main.appendChild(
+          drawProjectNode(project_list.getProject(listing.textContent))
+        );
+        projectListNode.childNodes.forEach(x => x.classList.remove('active-listing'));
+        listing.classList.add('active-listing');
+      }
+    );
+    listing.querySelector('.delete-listing').addEventListener(
+      'click',
+      () => {
+        project_list.deleteProject(listing.textContent);
+        listing.remove();
+        main.textContent = '';
+        projectListNode.childNodes[0].querySelector('div').click();
+      }
+    );
+  }
 );
-projectListNode.childNodes[0].click(); // Default project selected
+projectListNode.childNodes[0].querySelector('div').click(); // Default project selected
 
 // Add project button and form
 const addProjectNode = drawAddProjectButtonNode();

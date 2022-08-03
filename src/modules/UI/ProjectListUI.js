@@ -1,4 +1,5 @@
 import Project from "../Project";
+import DeleteIcon from "../../icons/delete.png"
 
 /**
  * Creates the HTML Node for the project list. Note that this function
@@ -23,12 +24,23 @@ export function drawProjectListNode(projectList) {
  * @returns HTML Node of each individual project listing
  */
 export function drawProjectListingNode(project) {
-  const projectListNode = document.createElement('button');
-  projectListNode.setAttribute('type', 'button');
-  projectListNode.classList.add('project-listing');
+  const projectListWrapperNode = document.createElement('button');
+  projectListWrapperNode.classList.add('project-listing');
+
+  const projectListNode = document.createElement('div');
   projectListNode.textContent = project.getTitle();
 
-  return projectListNode;
+  const deleteProjectListNode = document.createElement('button');
+  deleteProjectListNode.setAttribute('type', 'button');
+  deleteProjectListNode.classList.add('delete-listing');
+  const deleteButtonImg = new Image();
+  deleteButtonImg.src = DeleteIcon;
+  deleteProjectListNode.appendChild(deleteButtonImg);
+  
+  projectListWrapperNode.appendChild(projectListNode);
+  projectListWrapperNode.appendChild(deleteProjectListNode);
+
+  return projectListWrapperNode;
 }
 
 /**
