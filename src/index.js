@@ -63,7 +63,7 @@ projectListNode.childNodes.forEach(
     listing.querySelector('.delete-listing').addEventListener(
       'click',
       e => {
-        e.stopImmediatePropagation();
+        e.stopImmediatePropagation(); // prevent parent click event
         project_list.deleteProject(listing.textContent);
         listing.remove();
 

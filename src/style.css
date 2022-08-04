@@ -136,6 +136,16 @@ body {
   max-width: 80%;
 }
 
+.right {
+  display: flex;
+}
+
+.duedate {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 .add-task form {
   display: grid;
   grid-template-columns: 4fr 1fr;

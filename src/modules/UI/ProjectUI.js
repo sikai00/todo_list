@@ -1,5 +1,6 @@
 import Todo from "../Todo";
 import DeleteIcon from "../../icons/delete.png"
+import { format } from "../../../node_modules/date-fns";
 
 /**
  * Creates the HTML Node for the input project.
@@ -64,6 +65,29 @@ function drawTodoNode(todo, project) {
   left.appendChild(completeButton);
   left.appendChild(title);
 
+  const dueDate = document.createElement('div');
+  dueDate.classList.add('duedate');
+  const dueDateDisplay = document.createElement('div');
+  dueDateDisplay.textContent = todo.getDueDate() ? todo.getDueDate() : 'No due date';
+  const dueDateInput = document.createElement('input');
+  dueDateInput.setAttribute('type', 'date');
+  dueDateInput.style.display = 'none';
+  dueDate.appendChild(dueDateDisplay);
+  dueDate.appendChild(dueDateInput);
+
+  dueDate.addEventListener('click', () => {
+    if (dueDateInput.style.display === 'none') {
+      dueDateInput.style.display = 'block';
+      dueDateDisplay.style.display = 'none';  
+    }
+  });
+  dueDateInput.addEventListener('change', e => {
+    todo.setDueDate(dueDateInput.valueAsDate);
+    dueDateInput.style.display = 'none';
+    dueDateDisplay.style.display = 'block'; 
+    dueDateDisplay.textContent = todo.getDueDate() ? format(todo.getDueDate(), 'dd/MM/yyyy') : 'No due date';
+  });
+
   const deleteButton = document.createElement('button');
   deleteButton.setAttribute('type', 'button');
   deleteButton.classList.add('delete');
@@ -75,6 +99,7 @@ function drawTodoNode(todo, project) {
   deleteButtonImg.src = DeleteIcon;
   deleteButton.appendChild(deleteButtonImg);
 
+  right.appendChild(dueDate);
   right.appendChild(deleteButton);
 
   todoNode.appendChild(left);
