@@ -97,6 +97,10 @@ body {
   justify-content: space-between;
 }
 
+.project-listing:hover {
+  background-color: rgb(237, 230, 243);
+}
+
 .active-listing {
   background-color: rgb(230, 230, 230);
 }
@@ -173,6 +177,10 @@ body {
   background-color: transparent;
   padding: 5px 20px;
   cursor: pointer;
+}
+
+.add-project button:hover {
+  color: orange;
 }
 
 .add-project form {

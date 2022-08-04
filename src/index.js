@@ -6,33 +6,9 @@ import ProjectList from './modules/ProjectList';
 import drawProjectNode from './modules/UI/ProjectUI';
 import {drawProjectListNode, drawProjectListingNode, drawAddProjectButtonNode} from './modules/UI/ProjectListUI';
 import drawNavbar from './modules/UI/NavbarUI';
+import { populateStorage, getProjectListFromStorage } from './modules/Storage';
 
-const todo_list = [
-  new Todo('hi'),
-  new Todo('jelloaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
-  new Todo('cello'),
-  new Todo('bello'),
-  new Todo('hello'),
-]
-
-const todo_list_2 = [
-  new Todo('Butter'),
-  new Todo('Milk'),
-  new Todo('Flour'),
-  new Todo('Sugar'),
-  new Todo('Vanilla Extract'),
-]
-
-const todo_list_3 = [
-  new Todo('Coffee beans'),
-  new Todo('Tea leaves'),
-]
-
-const project_list = new ProjectList([
-  new Project('today', todo_list),
-  new Project('tmrw', todo_list_2),
-  new Project('dw', todo_list_3),
-]);
+const project_list = getProjectListFromStorage();
 
 // Navbar
 const navbar = drawNavbar();
@@ -66,7 +42,7 @@ projectListNode.childNodes.forEach(
         e.stopImmediatePropagation(); // prevent parent click event
         project_list.deleteProject(listing.textContent);
         listing.remove();
-
+        populateStorage(project_list);
         // look in the projectlistnodes, if there is an active listing, don't click
         if (!projectListNode.querySelector('.active-listing') && projectListNode.childElementCount !== 1) {
           main.textContent = '';
@@ -79,7 +55,9 @@ projectListNode.childNodes.forEach(
     );
   }
 );
-projectListNode.childNodes[0].querySelector('div').click(); // Default project selected
+if (projectListNode.childElementCount != 0) {
+  projectListNode.childNodes[0].querySelector('div').click(); // Default project selected
+}
 
 // Add project button and form
 const addProjectNode = drawAddProjectButtonNode();
@@ -109,6 +87,7 @@ submitProjectButton.addEventListener('click', e => {
     alert('Project titles must be unique.')
     return;
   }
+  populateStorage(project_list);
   const newProjectNode = drawProjectListingNode(newProject);
   projectListNode.lastElementChild.before(newProjectNode);
   titleInput.value = '';
