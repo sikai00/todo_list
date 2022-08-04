@@ -95,8 +95,7 @@ function drawAddTaskNode(project, projectNode) {
   // Add form
   const addFormNode = document.createElement('form');
   addFormNode.style.display = 'none';
-  const titleInput = document.createElement('input');
-  titleInput.setAttribute('type', 'text');
+  const titleInput = document.createElement('textarea');
   const submitButton = document.createElement('button');
   submitButton.setAttribute('type', 'button');
   submitButton.textContent = 'Add task';  
@@ -127,11 +126,10 @@ function drawAddTaskNode(project, projectNode) {
 
   // Add button
   const addButtonNode = document.createElement('button');
-  addButtonNode.classList.add('add');
   addButtonNode.textContent = 'Add task';
 
   addButtonNode.addEventListener('click', () => {
-    addFormNode.style.display = 'block';
+    addFormNode.style.display = 'grid';
     addButtonNode.style.display = 'none';
   });
 

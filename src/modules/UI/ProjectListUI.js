@@ -54,7 +54,6 @@ export function drawAddProjectButtonNode() {
 
   // Add button
   const addButtonNode = document.createElement('button');
-  addButtonNode.classList.add('add-button');
   addButtonNode.textContent = 'Add project';
 
   // Add form
@@ -67,7 +66,7 @@ export function drawAddProjectButtonNode() {
   const submitButton = document.createElement('button');
   submitButton.setAttribute('type', 'button');
   submitButton.classList.add('submit-project');
-  submitButton.textContent = 'Add project';  
+  submitButton.textContent = 'Submit';  
   
   const cancelButton = document.createElement('button');
   cancelButton.setAttribute('type', 'button');

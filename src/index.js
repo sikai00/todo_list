@@ -49,7 +49,7 @@ main.classList.add('main');
 const projectListNode = drawProjectListNode(project_list);
 projectListNode.childNodes.forEach(
   listing => {
-    listing.querySelector('div').addEventListener(
+    listing.addEventListener(
       'click', 
       () => {
         main.textContent = ''; // Wipes any content from previous project
@@ -62,11 +62,19 @@ projectListNode.childNodes.forEach(
     );
     listing.querySelector('.delete-listing').addEventListener(
       'click',
-      () => {
+      e => {
+        e.stopImmediatePropagation();
         project_list.deleteProject(listing.textContent);
         listing.remove();
-        main.textContent = '';
-        projectListNode.childNodes[0].querySelector('div').click();
+
+        // look in the projectlistnodes, if there is an active listing, don't click
+        if (!projectListNode.querySelector('.active-listing') && projectListNode.childElementCount !== 1) {
+          main.textContent = '';
+          projectListNode.childNodes[0].querySelector('div').click();
+        } else if (projectListNode.childElementCount === 1) {
+          // only add project button is left
+          main.textContent = '';
+        }
       }
     );
   }
@@ -77,11 +85,11 @@ projectListNode.childNodes[0].querySelector('div').click(); // Default project s
 const addProjectNode = drawAddProjectButtonNode();
 projectListNode.appendChild(addProjectNode);
 
-const addProjectButtonNode = addProjectNode.querySelector('.add-button');
+const addProjectButtonNode = addProjectNode.querySelector('button');
 const addProjectFormNode = addProjectNode.querySelector('form');
 
 addProjectButtonNode.addEventListener('click', () => {
-  addProjectFormNode.style.display = 'block';
+  addProjectFormNode.style.display = 'grid';
   addProjectButtonNode.style.display = 'none';
 });
 
