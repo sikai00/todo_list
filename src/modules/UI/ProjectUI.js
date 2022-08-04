@@ -65,6 +65,19 @@ function drawTodoNode(todo, project) {
   left.appendChild(completeButton);
   left.appendChild(title);
 
+  const priority = document.createElement('button');
+  priority.classList.add('priority');
+  priority.textContent = '!'
+
+  priority.addEventListener('click', () => {
+    todo.togglePriority();
+    if (todo.getPriority()) {
+      priority.classList.add('top-priority');
+    } else {
+      priority.classList.remove('top-priority');
+    }
+  });
+
   const dueDate = document.createElement('div');
   dueDate.classList.add('duedate');
   const dueDateDisplay = document.createElement('div');
@@ -99,6 +112,7 @@ function drawTodoNode(todo, project) {
   deleteButtonImg.src = DeleteIcon;
   deleteButton.appendChild(deleteButtonImg);
 
+  right.appendChild(priority);
   right.appendChild(dueDate);
   right.appendChild(deleteButton);
 

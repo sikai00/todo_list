@@ -133,11 +133,13 @@ body {
   flex-direction: row;
   align-items: flex-start;
   column-gap: 10px;
-  max-width: 80%;
+  max-width: 60%;
 }
 
 .right {
   display: flex;
+  align-items: center;
+  column-gap: 10px;
 }
 
 .duedate {
@@ -195,4 +197,25 @@ body {
 
 .cancel-project {
   grid-column: 2 / 3;
+}
+
+.priority {
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+  padding: 5px 10px;
+  color: grey;
+}
+
+.priority:hover {
+  background-color: rgb(238, 211, 211);
+  border-radius: 3px;
+}
+
+.top-priority,
+.priority:active {
+  color: red;
+  font-weight: bold;
+  background-color: rgb(238, 192, 192);
+  border-radius: 3px;
 }

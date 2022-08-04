@@ -1,5 +1,5 @@
 export default class Todo {
-  constructor(title, description = '', dueDate = null, priority = '') {
+  constructor(title, description = '', dueDate = null, priority = false) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -35,8 +35,8 @@ export default class Todo {
     return this.priority;
   }
 
-  setPriority(newPriority) {
-    this.priority = newPriority;
+  togglePriority() {
+    this.priority = !this.priority;
   }
 
   getCompleted() {
