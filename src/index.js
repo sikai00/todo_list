@@ -1,14 +1,13 @@
 import '../node_modules/normalize.css';
 import './style.css';
-import Todo from './modules/Todo';
 import Project from './modules/Project';
-import ProjectList from './modules/ProjectList';
-import drawProjectNode from './modules/UI/ProjectUI';
+import ProjectUI from './modules/UI/ProjectUI';
 import {drawProjectListNode, drawProjectListingNode, drawAddProjectButtonNode} from './modules/UI/ProjectListUI';
 import drawNavbar from './modules/UI/NavbarUI';
 import { populateStorage, getProjectListFromStorage } from './modules/Storage';
 
 const project_list = getProjectListFromStorage();
+const projectUI = new ProjectUI(project_list);
 
 // Navbar
 const navbar = drawNavbar();
@@ -30,7 +29,7 @@ projectListNode.childNodes.forEach(
       () => {
         main.textContent = ''; // Wipes any content from previous project
         main.appendChild(
-          drawProjectNode(project_list.getProject(listing.textContent))
+          projectUI.drawProjectNode(project_list.getProject(listing.textContent))
         );
         projectListNode.childNodes.forEach(x => x.classList.remove('active-listing'));
         listing.classList.add('active-listing');
@@ -98,7 +97,7 @@ submitProjectButton.addEventListener('click', e => {
     () => {
       main.textContent = '';
       main.appendChild(
-        drawProjectNode(project_list.getProject(newProjectNode.textContent)));
+        projectUI.drawProjectNode(project_list.getProject(newProjectNode.textContent)));
       projectListNode.childNodes.forEach(x => x.classList.remove('active-listing'));
       newProjectNode.classList.add('active-listing');
     }

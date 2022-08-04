@@ -4,6 +4,7 @@ import Todo from "./Todo";
 
 export function populateStorage(projectList) {
   localStorage.setItem('projectList', JSON.stringify(projectList));
+  console.log(projectList);
 }
 
 export function getProjectListFromStorage() {
@@ -16,7 +17,8 @@ export function getProjectListFromStorage() {
   for (let p of projectList.project_list) {
     const tempProject = new Project(p.title);
     for (let t of p.todo_list) {
-      tempProject.addTodo(new Todo(t.title, t.description, t.dueDate, t.priority, t.completed));
+      const tempDate = t.dueDate != null ? new Date(t.dueDate) : null;
+      tempProject.addTodo(new Todo(t.title, t.description, tempDate, t.priority, t.completed));
     }
     tempProjectList.addProject(tempProject);
   }

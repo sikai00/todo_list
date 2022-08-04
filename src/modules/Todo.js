@@ -1,10 +1,10 @@
 export default class Todo {
-  constructor(title, description = '', dueDate = null, priority = false) {
+  constructor(title, description = '', dueDate = null, priority = false, completed = false) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.completed = false;
+    this.completed = completed;
   }
 
   getTitle() {
